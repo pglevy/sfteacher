@@ -7,7 +7,7 @@ var jsonParser = bodyParser.json();
 	app.use(bodyParser.urlencoded({ extended: false }));
 
 var DBNAME ="sfteacher.db"
-var TABLE_COURSES = "tbl_cources";
+var TABLE_COURSES = "tbl_courses";
 var TABLE_STUDENTS = "tbl_students";
 var TABLE_FLAG = "tbl_flag";//Survey
 
@@ -21,31 +21,41 @@ var db = new sqlite3.Database(DBNAME);
 
 db.serialize(function() {
 
-	//delete any existing tables
+//delete any existing tables
 	db.run("DROP TABLE if exists " + TABLE_COURSES + "");
 	db.run("DROP TABLE if exists " + TABLE_STUDENTS + "");
 	db.run("DROP TABLE if exists " + TABLE_FLAG + "");
 
+//create tables
 
-	//create tables
-
-	db.run("CREATE TABLE if not exists " + TABLE_COURSES + " (date TEXT, time TEXT,course_name TEXT,course_ID TEXT,present_students INTEGER,absent_students INTEGER,excused_students INTEGER,tardy_students INTEGER)");
-// 	db.run("CREATE TABLE if not exists " + TABLE_STUDENTS + " (userId INTEGER PRIMARY KEY AUTOINCREMENT,groupIds TEXT,  userName TEXT, fName TEXT, lName TEXT, avatar TEXT)");
-// 	db.run("CREATE TABLE if not exists " + TABLE_FLAG + " (resultId INTEGER PRIMARY KEY AUTOINCREMENT, userId INTEGER, answer TEXT)");
+	db.run("CREATE TABLE if not exists " + TABLE_COURSES + " (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, time TEXT,course_name TEXT,course_ID TEXT,present_students INTEGER,absent_students INTEGER,excused_students INTEGER,tardy_students INTEGER)");
+	db.run("CREATE TABLE if not exists " + TABLE_STUDENTS + " (id INTEGER PRIMARY KEY AUTOINCREMENT, student_name TEXT,student_id	INTEGER,student_username TEXT,student_integration_id TEXT,course_id TEXT,attendance_status TEXT,last_updated_date TEXT,image TEXT)");
+	db.run("CREATE TABLE if not exists " + TABLE_FLAG + " (id INTEGER PRIMARY KEY AUTOINCREMENT,survey TEXT,instructor TEXT,survey_date TEXT,student_id TEXT,tracking_item_name TEXT)");
 
 
-	//insert group
-// 	db.run("INSERT INTO " + TABLE_STUDENTS + "('groupName') VALUES ('Third Grade Math')");
+//insert students
+  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Darren Mason','dmason1234','dmason','darren.mason','SCI-BIOL202-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
+  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Philip Levy','philiplevy1234','philiplevy','philip.levy','HIST-HIST301-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
+  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Josh Braun','joshbraun5005','joshbraun','josh.braun','SCI-BIOL202-600-201602','ABSENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
+  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Darren Mason','sjobs1234','sjobs','steve.jobes','SCI-BIOL101-500-201601','ABSENT','2016-05-07 10:00:00','http://placehold.it/200x200')");
+  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Aaron Jones','arronjones1234','aaronjones','arron.jones','HIST-HIST301-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
+  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Steve Day','steveday1234','steveday','steve.day','SCI-BIOL202-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
 
-// 	insert courses
-// 	db.run("INSERT INTO " + TABLE_COURSES + "('userName','fName','lName','avatar','groupIds') VALUES ('djmason9','Darren','Mason','https://avatars1.githubusercontent.com/u/327110','1,2,3')");
+//insert courses
+	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_ID','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-07 10:00:00','10:00:00 AM','Microbiology II','SCI-BIOL202-600-201602','49','2','1','3')");
+	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_ID','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-05 10:00:00','08:00:00 AM','Western History & Medieval Politics','HIST-HIST301-600-201602','30','2','1','3')");
+	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_ID','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-4 10:00:00','13:00:00 PM','General Biology I','SCI-BIOL101-500-201601','22','2','1','3')");
 
-// 	insert flags
-//   db.run("INSERT INTO " + TABLE_FLAG + "('groupName') VALUES ('Third Grade Math')");
+//insert flags
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name') VALUES ('Fall 2016','Yasmin Gold','2016-06-07 10:00:00','agoldfinger5005','Poor Attendants')");
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name') VALUES ('Spring 2016','Yasmin Gold','2016-06-07 10:00:00','dmason1234','Work Life Interfering')");
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name') VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','philiplevy1234','Dramatic Change in Appearance')");
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name') VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','steveday1234','Dramatic Change in Appearance')");
+
 
 	//select and loop results
 	db.each("SELECT * from " + TABLE_COURSES, function(err, row) {
-		console.log(row.userId + ": " + row.userName + " (" + row.groupIds + ")");
+		console.log(row.id + ": " + row.course_name + " (" + row.date + ")");
   	});
 });
 
