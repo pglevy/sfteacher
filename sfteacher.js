@@ -28,9 +28,9 @@ db.serialize(function() {
 
 //create tables
 
-	db.run("CREATE TABLE if not exists " + TABLE_COURSES + " (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, time TEXT,course_name TEXT,course_Id TEXT,present_students INTEGER,absent_students INTEGER,excused_students INTEGER,tardy_students INTEGER)");
+	db.run("CREATE TABLE if not exists " + TABLE_COURSES + " (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, time TEXT,course_name TEXT,course_id TEXT,present_students INTEGER,absent_students INTEGER,excused_students INTEGER,tardy_students INTEGER)");
 	db.run("CREATE TABLE if not exists " + TABLE_STUDENTS + " (id INTEGER PRIMARY KEY AUTOINCREMENT, student_name TEXT,student_id	INTEGER,student_username TEXT,student_integration_id TEXT,course_id TEXT,attendance_status TEXT,last_updated_date TEXT,image TEXT)");
-	db.run("CREATE TABLE if not exists " + TABLE_FLAG + " (id INTEGER PRIMARY KEY AUTOINCREMENT,survey TEXT,instructor TEXT,survey_date TEXT,student_id TEXT,tracking_item_name TEXT,course_Id TEXT)");
+	db.run("CREATE TABLE if not exists " + TABLE_FLAG + " (id INTEGER PRIMARY KEY AUTOINCREMENT,survey TEXT,instructor TEXT,survey_date TEXT,student_id TEXT,tracking_item_name TEXT,course_id TEXT)");
 
 
 //insert students
@@ -42,15 +42,15 @@ db.serialize(function() {
   db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Steve Day','steveday1234','steveday','steve.day','SCI-BIOL202-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
 
 //insert courses
-	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_Id','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-07 10:00:00','10:00:00 AM','Microbiology II','SCI-BIOL202-600-201602','49','2','1','3')");
-	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_Id','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-05 10:00:00','08:00:00 AM','Western History & Medieval Politics','HIST-HIST301-600-201602','30','2','1','3')");
-	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_Id','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-4 10:00:00','13:00:00 PM','General Biology I','SCI-BIOL101-500-201601','22','2','1','3')");
+	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_id','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-07 10:00:00','10:00:00 AM','Microbiology II','SCI-BIOL202-600-201602','49','2','1','3')");
+	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_id','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-05 10:00:00','08:00:00 AM','Western History & Medieval Politics','HIST-HIST301-600-201602','30','2','1','3')");
+	db.run("INSERT INTO " + TABLE_COURSES + "('date', 'time','course_name','course_id','present_students','absent_students','excused_students','tardy_students') VALUES ('2016-06-4 10:00:00','13:00:00 PM','General Biology I','SCI-BIOL101-500-201601','22','2','1','3')");
 
 //insert flags
-  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_Id) VALUES ('Fall 2016','Yasmin Gold','2016-06-07 10:00:00','joshbraun5005','Poor Attendants','SCI-BIOL202-600-201602')");
-  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_Id) VALUES ('Spring 2016','Yasmin Gold','2016-06-07 10:00:00','dmason1234','Work Life Interfering','SCI-BIOL202-600-201602')");
-  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_Id) VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','philiplevy1234','Dramatic Change in Appearance','HIST-HIST301-600-201602')");
-  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_Id) VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','steveday1234','Dramatic Change in Appearance','SCI-BIOL202-600-201602')");
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_id) VALUES ('Fall 2016','Yasmin Gold','2016-06-07 10:00:00','joshbraun5005','Poor Attendants','SCI-BIOL202-600-201602')");
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_id) VALUES ('Spring 2016','Yasmin Gold','2016-06-07 10:00:00','dmason1234','Work Life Interfering','SCI-BIOL202-600-201602')");
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_id) VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','philiplevy1234','Dramatic Change in Appearance','HIST-HIST301-600-201602')");
+  db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_id) VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','steveday1234','Dramatic Change in Appearance','SCI-BIOL202-600-201602')");
 
 
 	//select and loop results
