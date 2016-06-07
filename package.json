@@ -21,9 +21,5 @@
     "run-sequence": "^1.1.1",
     "yargs": "^3.15.0"
   },
-  "private": true,
-  "dependencies": {
-    "express": "^4.13.4",
-    "sqlite3": "^3.1.4"
-  }
+  "private": true
 }
