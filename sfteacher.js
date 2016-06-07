@@ -69,122 +69,118 @@ var server = app.listen(8081, function () {
 	var port = server.address().port;
 
 });
-
-/* USER */
-app.post('/deleteUser', jsonParser, function (req, res){
-
-    if (!req.body) return res.sendStatus(400);
-
-  	deleteUser(req,res);
-
+//
+// /* COURSES */
+app.get('/courses', function (req, res) {
+	getAllCourses(res);
 });
-
-app.post('/addUser', jsonParser, function (req, res){
-    if (!req.body) return res.sendStatus(400);
-
-  	addUser(req,res);
-
-});
-
-app.get('/listUsers', function (req, res) {
-
-	getAllUsers(res);
-});
-//used for login
-app.get('/getUser', function (req, res) {
-
-    console.log(req.query.userName);
-
-	getUser(req, res);
-});
-
-/* QUIZ */
-app.post('/createQuiz', jsonParser, function (req, res){
-
-    if (!req.body) return res.sendStatus(400);
-
-	createQuiz(req,res);
-});
-
-app.post('/deleteQuiz', jsonParser, function (req, res){
-
-    if (!req.body) return res.sendStatus(400);
-
-  	deleteQuiz(req,res);
-
-});
-
-app.get('/getQuiz', function (req, res) {
-
-    console.log(req.query.quizId);
-
-	getQuiz(req, res);
-});
-
-app.get('/getAllQuizzes', function (req, res) {
-	getAllQuizzes(req, res);
-});
-
-/* GROUP */
-app.get('/groups', function (req, res) {
-
-	getAllGroups(res);
-});
-
-app.get('/', function (req, res) {
-   res.send('Base call this does Nothing!');
-});
-
-///////////////////// FUNCITONS /////////////////////
-
-//Add Quiz
-function createQuiz(req,res){
-	var body = req.body;
-	databaseManager("INSERT INTO " + TABLE_QUIZ + "('groupId','quiz','quizName') VALUES ('" + body.groupId + "','" + body.quiz + "','" + body.quizName + "')", MODIFY,"Quiz Added",res);
+//
+// app.post('/addUser', jsonParser, function (req, res){
+//     if (!req.body) return res.sendStatus(400);
+//
+//   	addUser(req,res);
+//
+// });
+//
+// app.get('/listUsers', function (req, res) {
+//
+// 	getAllUsers(res);
+// });
+// //used for login
+// app.get('/getUser', function (req, res) {
+//
+//     console.log(req.query.userName);
+//
+// 	getUser(req, res);
+// });
+//
+// /* QUIZ */
+// app.post('/createQuiz', jsonParser, function (req, res){
+//
+//     if (!req.body) return res.sendStatus(400);
+//
+// 	createQuiz(req,res);
+// });
+//
+// app.post('/deleteQuiz', jsonParser, function (req, res){
+//
+//     if (!req.body) return res.sendStatus(400);
+//
+//   	deleteQuiz(req,res);
+//
+// });
+//
+// app.get('/getQuiz', function (req, res) {
+//
+//     console.log(req.query.quizId);
+//
+// 	getQuiz(req, res);
+// });
+//
+// app.get('/getAllQuizzes', function (req, res) {
+// 	getAllQuizzes(req, res);
+// });
+//
+// /* GROUP */
+// app.get('/groups', function (req, res) {
+//
+// 	getAllGroups(res);
+// });
+//
+// app.get('/', function (req, res) {
+//    res.send('Base call this does Nothing!');
+// });
+//
+// ///////////////////// FUNCITONS /////////////////////
+//
+// //Add Quiz
+// function createQuiz(req,res){
+// 	var body = req.body;
+// 	databaseManager("INSERT INTO " + TABLE_QUIZ + "('groupId','quiz','quizName') VALUES ('" + body.groupId + "','" + body.quiz + "','" + body.quizName + "')", MODIFY,"Quiz Added",res);
+// }
+//
+// function deleteQuiz(req,res){
+// 	var body = req.body;
+// 	databaseManager("DELETE FROM " + TABLE_QUIZ + " WHERE quizId ='" + body.quizId + "'", MODIFY, body.quizName + " has been deleted!",res);
+// }
+// //gets a quiz by id
+// function getQuiz(req,res){
+// 	databaseManager("SELECT * from " + TABLE_QUIZ + " WHERE quizId ='" + req.query.quizId +"'",SELECT,null,res);
+// }
+//
+// function getAllQuizzes(req,res){
+// 	databaseManager("SELECT * from " + TABLE_QUIZ,SELECT,null,res);
+// }
+//
+// //Delete User
+// function deleteUser(req,res){
+// 	var body = req.body;
+// 	databaseManager("DELETE FROM " + TABLE_DETAILS + " WHERE userId ='" + body.userId + "'", MODIFY,body.userName + " has been deleted!",res);
+// }
+//
+// //Add User
+// function addUser(req,res){
+//
+// 	var body = req.body;
+// 	if(body.avatarURL == "")
+// 		body.avatarURL = "http://www.air-cosmos.com/img/unknown-avatar.png";//default pic
+//
+// 	databaseManager("INSERT INTO " + TABLE_DETAILS + "('userName','fName','lName','avatar','groupIds') VALUES ('" + body.userName + "','" + body.fName + "','" + body.lName + "','" + body.avatarURL + "','" + body.groupIds + "')", MODIFY,JSON.stringify(body),res);
+// }
+//
+// //Get a Single User
+// function getUser(req,res){
+// 	databaseManager("SELECT * from " + TABLE_DETAILS + " WHERE userName ='" + req.query.userName +"'",SELECT,null,res);
+// }
+//
+// //Get All Users
+function getAllCourses(res){
+	databaseManager("SELECT  * from " + TABLE_COURSES + "",SELECT,null,res);
 }
-
-function deleteQuiz(req,res){
-	var body = req.body;
-	databaseManager("DELETE FROM " + TABLE_QUIZ + " WHERE quizId ='" + body.quizId + "'", MODIFY, body.quizName + " has been deleted!",res);
-}
-//gets a quiz by id
-function getQuiz(req,res){
-	databaseManager("SELECT * from " + TABLE_QUIZ + " WHERE quizId ='" + req.query.quizId +"'",SELECT,null,res);
-}
-
-function getAllQuizzes(req,res){
-	databaseManager("SELECT * from " + TABLE_QUIZ,SELECT,null,res);
-}
-
-//Delete User
-function deleteUser(req,res){
-	var body = req.body;
-	databaseManager("DELETE FROM " + TABLE_DETAILS + " WHERE userId ='" + body.userId + "'", MODIFY,body.userName + " has been deleted!",res);
-}
-
-//Add User
-function addUser(req,res){
-
-	var body = req.body;
-	if(body.avatarURL == "")
-		body.avatarURL = "http://www.air-cosmos.com/img/unknown-avatar.png";//default pic
-
-	databaseManager("INSERT INTO " + TABLE_DETAILS + "('userName','fName','lName','avatar','groupIds') VALUES ('" + body.userName + "','" + body.fName + "','" + body.lName + "','" + body.avatarURL + "','" + body.groupIds + "')", MODIFY,JSON.stringify(body),res);
-}
-
-//Get a Single User
-function getUser(req,res){
-	databaseManager("SELECT * from " + TABLE_DETAILS + " WHERE userName ='" + req.query.userName +"'",SELECT,null,res);
-}
-
-//Get All Users
-function getAllUsers(res){
-	databaseManager("SELECT  * from " + TABLE_DETAILS + "",SELECT,null,res);
-}
-//get all groups
-function getAllGroups(res){
-	databaseManager("SELECT * from " + TABLE_GROUP,SELECT,null,res);
-}
+// //get all groups
+// function getAllGroups(res){
+// 	databaseManager("SELECT * from " + TABLE_GROUP,SELECT,null,res);
+// }
 
 function databaseManager(sql,type,response,res){
 
