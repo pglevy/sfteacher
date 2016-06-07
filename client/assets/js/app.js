@@ -23,17 +23,20 @@
           $scope['courses'] = 'Failed'
         })
   }])
-  .controller('StudentsController',
+  .controller('SurveyController',
     ["$scope", "$state", "$http",function($scope, $state, $http){
 
-    $http.get("http://localhost:8081/students", {cache:true})
+var params = {
+    "courseId": "SCI-BIOL202-600-201602"
+}
+    $http.get("http://localhost:8081/surveys", {params: params, cache:true})
         .success(function(data){
           console.log(data);
-          $scope['courses'] = data;
+          $scope['surveys'] = data;
         })
         .error(function(data){
           console.log(data);
-          $scope['courses'] = 'Failed'
+          $scope['surveys'] = 'Failed'
         })
   }])
     .config(config)

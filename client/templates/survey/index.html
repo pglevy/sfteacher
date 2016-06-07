@@ -1,9 +1,11 @@
 ---
-name: survey
-url: /survey
-controller: StudentsController
+name: darren
+url: /darren
+controller: SurveyController
 ---
 
-<div>
-survey
-</div>
+<ul>
+<li ng-repeat="survey in surveys">
+{{survey.student_name}}
+</li>
+</ul>

@@ -202,7 +202,8 @@ function getStudentsInClass(req,res){
 
 function getSurveyInClass(req,res){
   var body = req.query;
-	databaseManager("SELECT * from " + TABLE_FLAG + " WHERE course_id ='" + body.courseId +"'",SELECT,null,res);
+//   SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from tbl_flag f   INNER JOIN   tbl_students s   on s.student_id =  f.student_id WHERE f.course_id = 'SCI-BIOL202-600-201602'
+	databaseManager("SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from " + TABLE_FLAG + " f INNER JOIN " + TABLE_STUDENTS + " s ON s.student_id = f.student_id WHERE f.course_id ='" + body.courseId +"'",SELECT,null,res);
 }
 
 //POSTS
