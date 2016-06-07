@@ -37,7 +37,7 @@ db.serialize(function() {
   db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Darren Mason','dmason1234','dmason','darren.mason','SCI-BIOL202-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
   db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Philip Levy','philiplevy1234','philiplevy','philip.levy','HIST-HIST301-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
   db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Josh Braun','joshbraun5005','joshbraun','josh.braun','SCI-BIOL202-600-201602','ABSENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
-  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Darren Mason','sjobs1234','sjobs','steve.jobes','SCI-BIOL101-500-201601','ABSENT','2016-05-07 10:00:00','http://placehold.it/200x200')");
+  db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Steve Jobs','sjobs1234','sjobs','steve.jobes','SCI-BIOL101-500-201601','ABSENT','2016-05-07 10:00:00','http://placehold.it/200x200')");
   db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Aaron Jones','arronjones1234','aaronjones','arron.jones','HIST-HIST301-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
   db.run("INSERT INTO " + TABLE_STUDENTS + "('student_name','student_id','student_username','student_integration_id','course_id','attendance_status','last_updated_date','image') VALUES ('Steve Day','steveday1234','steveday','steve.day','SCI-BIOL202-600-201602','PRESENT','2016-06-07 10:00:00','http://placehold.it/200x200')");
 
@@ -70,9 +70,17 @@ var server = app.listen(8081, function () {
 
 });
 //
-// /* COURSES */
+// /* GET DATA */
 app.get('/courses', function (req, res) {
 	getAllCourses(res);
+});
+
+app.get('/students', function (req, res) {
+	getAllStudents(res);
+});
+
+app.get('/student/course', function (req, res) {
+	getStudentsInClass(req, res);
 });
 //
 // app.post('/addUser', jsonParser, function (req, res){
@@ -95,12 +103,12 @@ app.get('/courses', function (req, res) {
 // });
 //
 // /* QUIZ */
-// app.post('/createQuiz', jsonParser, function (req, res){
-//
-//     if (!req.body) return res.sendStatus(400);
-//
-// 	createQuiz(req,res);
-// });
+app.post('/updateAttendance', jsonParser, function (req, res){
+
+  if (!req.body) return res.sendStatus(400);
+
+	updateAttendance(req,res);
+});
 //
 // app.post('/deleteQuiz', jsonParser, function (req, res){
 //
@@ -173,10 +181,29 @@ app.get('/courses', function (req, res) {
 // 	databaseManager("SELECT * from " + TABLE_DETAILS + " WHERE userName ='" + req.query.userName +"'",SELECT,null,res);
 // }
 //
-// //Get All Users
+// Gets
 function getAllCourses(res){
 	databaseManager("SELECT  * from " + TABLE_COURSES + "",SELECT,null,res);
 }
+
+function getAllStudents(res){
+	databaseManager("SELECT  * from " + TABLE_STUDENTS + "",SELECT,null,res);
+}
+
+function getStudentsInClass(req,res){
+  var body = req.query;
+	databaseManager("SELECT * from " + TABLE_STUDENTS + " WHERE course_id ='" + body.courseId +"'",SELECT,null,res);
+}
+
+//POSTS
+function updateAttendance(req,res){
+	var body = req.body;
+	console.log("UPDATE " + TABLE_STUDENTS + " SET attendance_status=" + body.status + " WHERE student_id = " + body.studenId);
+	databaseManager("UPDATE " + TABLE_STUDENTS + " SET attendance_status=" + body.status + " WHERE student_id = " + body.studenId, MODIFY, body.studentName + " has been updated!",res);
+
+}
+
+
 // //get all groups
 // function getAllGroups(res){
 // 	databaseManager("SELECT * from " + TABLE_GROUP,SELECT,null,res);
