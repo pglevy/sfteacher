@@ -198,9 +198,7 @@ function getStudentsInClass(req,res){
 //POSTS
 function updateAttendance(req,res){
 	var body = req.body;
-	console.log("UPDATE " + TABLE_STUDENTS + " SET attendance_status=" + body.status + " WHERE student_id = " + body.studenId);
-	databaseManager("UPDATE " + TABLE_STUDENTS + " SET attendance_status=" + body.status + " WHERE student_id = " + body.studenId, MODIFY, body.studentName + " has been updated!",res);
-
+	databaseManager("UPDATE " + TABLE_STUDENTS + " SET attendance_status='" + body.status + "' WHERE student_id = '" + body.studentId + "'", MODIFY, body.studentName + " has been updated!",res);
 }
 
 
