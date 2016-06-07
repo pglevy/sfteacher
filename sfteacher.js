@@ -87,6 +87,12 @@ app.get('/surveys', function (req, res) {
 	getSurveyInClass(req, res);
 });
 
+app.post('/updateAttendance', jsonParser, function (req, res){
+
+  if (!req.body) return res.sendStatus(400);
+
+	updateAttendance(req,res);
+});
 //
 // app.post('/addUser', jsonParser, function (req, res){
 //     if (!req.body) return res.sendStatus(400);
@@ -108,12 +114,7 @@ app.get('/surveys', function (req, res) {
 // });
 //
 // /* QUIZ */
-app.post('/updateAttendance', jsonParser, function (req, res){
 
-  if (!req.body) return res.sendStatus(400);
-
-	updateAttendance(req,res);
-});
 //
 // app.post('/deleteQuiz', jsonParser, function (req, res){
 //
