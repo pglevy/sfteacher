@@ -12,12 +12,22 @@
   </head>
   <body>
     <div class="grid-frame vertical">
-      <div class="grid-content shrink" style="padding: 0;">
-        <ul class="primary condense menu-bar">
-          <li><a><strong>Starfish Teacher</strong></a></li>
+      
+        <div class="primary title-bar">
+        <div class="center title">Course Name</div>
+        <span class="left"><a href="/">Home</a></span>
+        <span class="right"><a href="#"></a></span>
+        </div>
+      
+      <!-- <div class="grid-block"> -->
+        <div ui-view class="grid-block"></div>
+      <!-- </div> -->
+
+      <div class="grid-content shrink">
+        <ul class="menu-bar">
+        <li><a ui-sref="attendance">Attendance</a></li>
+        <li><a ui-sref="survey">Survey</a></li>
         </ul>
-      </div>
-      <div ui-view class="grid-content">
       </div>
     </div>
   </body>
