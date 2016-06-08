@@ -50,9 +50,9 @@
 
     if($scope.post){
 
-    $http.headers['Access-Control-Allow-Origin'] = '*';
-    $http.headers["Access-Control-Allow-Headers"] = "X-Requested-With";
-    $http.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT';
+    $http.defaults.headers['Access-Control-Allow-Origin'] = '*';
+    $http.defaults.headers["Access-Control-Allow-Headers"] = "X-Requested-With";
+    $http.defaults.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT';
 
     params = {
     'status' : $scope.attendance,
