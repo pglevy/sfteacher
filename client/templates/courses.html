@@ -6,9 +6,14 @@ controller: CourseController
 
 
 <div class="grid-container">
-	<div class="grid-block" ng-repeat="course in courses">
+	<ul class="menu-bar calendar">
+				<li><a><img zf-iconic="" icon="chevron" data-direction="left" size="small" class="color-hobsons"></a></li>
+				<li><a>Today</a></li>
+				<li><a><img zf-iconic="" icon="chevron" data-direction="right" size="small" class="color-hobsons"></a></li>
+			</ul>
+	<div class="grid-block">
 		<div class="grid-content">
-			<div class="card">
+			<div class="card" ng-repeat="course in courses">
 				<div class="card-section">
 					<small>{{ course.course_id}}</small>
 					<a ui-sref="attendance({ id: course.course_id})">

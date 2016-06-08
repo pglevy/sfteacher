@@ -13,7 +13,11 @@ $gray: #616365;
 $gray25: #d7d8d8;
 $offblack: #252628;
 
+$purple: #4B44C5;
+
+$teal: #6CCBCB;
 $teal150: #37a2a2;
+$teal25: #ddf2f2;
 
 $white: #ffffff;
 
@@ -40,6 +44,44 @@ small {
 	color: $gray;
 }
 
+.accordion {
+	border: 0px;
+	text-align: center;
+	margin-bottom: .5em;
+}
+
+.accordion-title {
+	border-radius: 4.8rem;
+	width: 200px;
+	border: 1px solid $teal150;
+	background: $white;
+	color: $teal150;
+	text-transform: uppercase;
+	font-size: .72rem;
+	padding: 0.85em 1em;
+}
+
+.accordion-title:hover, .accordion-title:focus, .accordion-title:active, .is-active > .accordion-title {
+	background: $teal150;
+	color: $white;
+}
+
+.accordion-content li, .accordion-content ul {
+	text-align: left;
+	border: 0px;
+}
+
+.block-list li > a:hover, .block-list li > label:hover, .block-list li select:hover {
+	background: $teal25;
+}
+
+.block-list li:first-child {
+	border: 0px;
+}
+
+.block-list li > input[type="checkbox"]:checked + label::before, .block-list li > input[type="radio"]:checked + label::before {
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32" viewBox="0 0 32 32"><path fill="#D20061" d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zm6.906 8.875l2.219 2.031-12.063 13.281-6.188-6.188 2.125-2.125 3.938 3.938 9.969-10.938z"/></svg>');
+}
 
 .button {
 	border-radius: 4.8rem;
@@ -63,6 +105,30 @@ small {
 
 .card {
 	color: $offblack;
+	box-shadow: inset 0px -6px 0px 0px $fuschia;
+	// box-shadow: 1px 1px 0px 0px $gray25;
+	border-radius: 0;
+}
+
+.card:nth-child(1) {
+    box-shadow: inset 0px -6px 0px 0px $fuschia;
+}
+
+.card:nth-child(2) {
+    box-shadow: inset 0px -6px 0px 0px $purple;
+}
+
+.card:nth-child(3) {
+    box-shadow: inset 0px -6px 0px 0px $teal;
+}
+
+.menu-bar .iconic * {
+	stroke: $hobsons;
+}
+
+.footer {
+	border-top: 1px solid $teal25;
+	padding: 0;
 }
 
 .grid-container {
@@ -73,12 +139,37 @@ small {
 }
 
 .logo {
-	width: 2rem;
+	width: 1.5rem;
+}
+
+.menu-bar {
+	text-transform: uppercase;
+}
+
+.menu-bar > li > a {
+	color: $hobsons;
+}
+
+.menu-bar > li > a:hover, .menu-bar > li > a:focus, .menu-bar > li > a:active {
+	background: $teal25
+}
+
+.menu-bar.calendar {
+	// height: 3rem;
+}
+
+.menu-bar.calendar > li > a {
+	padding-top: .5rem;
+	padding-bottom: 0;
 }
 
 .row {
 	padding-top: .5em;
 	border-bottom: 1px solid $gray25;
+}
+
+.row-top-half {
+	padding-top: .5em;
 }
 
 .title-bar.primary {
