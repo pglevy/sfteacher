@@ -1,6 +1,6 @@
 ---
 name: attendance
-url: /attendance/:id
+url: /attendance/:id?status=studentId=post=
 controller: AttendanceController
 ---
 
@@ -12,7 +12,9 @@ controller: AttendanceController
 .grid-content {
 	/*padding: 1em;*/
 }
+
 </style>
+
 
 <div class="grid-container">
 	<div class="grid-block" ng-repeat="student in students">
@@ -21,7 +23,7 @@ controller: AttendanceController
 				<div class="align-bottom"></div>
 				<div class="align-center"></div>
 				<div class="align-top">
-					<img src="http://placehold.it/50x50">
+					<img src="{{student.image}}" width="100" height="100">
 				</div>
 			</div>
 		</div>
@@ -33,10 +35,10 @@ controller: AttendanceController
 				<zf-as-content position="bottom">
 					<p>Tap to mark attendance</p>
 					<ul>
-						<li><a href="#">Present</a></li>
-						<li><a href="#">Absent</a></li>
-						<li><a href="#">Excused</a></li>
-						<li><a href="#">Tardy</a></li>
+						<li><a ui-sref="attendance({ id: student.id, status : 'Present', studentId: student.student_id, post : true})">Present</a></li>
+						<li><a ui-sref="attendance({  id: student.id,  status : 'Absent', studentId: student.student_id, post : true})">Absent</a></li>
+						<li><a ui-sref="attendance({  id: student.id,  status : 'Excused', studentId: student.student_id, post : true})">Excused</a></li>
+						<li><a ui-sref="attendance({  id: student.id,  status : 'Tardy', studentId: student.student_id, post : true})">Tardy</a></li>
 					</ul>
 				</zf-as-content>
 				</zf-action-sheet>
