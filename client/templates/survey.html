@@ -4,7 +4,6 @@ url: /survey
 ---
 
 <style>
-
 .grid-block {
 	/*border: 1px solid red;*/
 	/*border-top: 1px solid gray;*/
@@ -12,55 +11,51 @@ url: /survey
 .grid-content {
 	/*padding: 1em;*/
 }
-
-
-
-
 </style>
 
 
 <div class="grid-container">
 	<div class="grid-block">
-		<div class="grid-block shrink v-align">
+		<div class="grid-block small-3">
 			<div class="grid-content">
 					<div class="align-bottom"></div>
-					<div class="align-center">
+					<div class="align-center"></div>
+					<div class="align-top">
 						<img src="http://placehold.it/50x50">
 					</div>
-					<div class="align-top"></div>
 			</div>
 		</div>
-		<div class="grid-block">
+		<div class="grid-block small-9">
 			<div class="grid-content">
 				<h2>Rachel Lands</h2>
 			</div>
 		</div>
 	</div>
 	<div class="grid-block">
-		<div class="grid-block small-3 v-align">
-			<!-- nothing -->
+		<div class="grid-block small-3">
+			<!-- empty -->
 		</div>
 		<div class="grid-block small-9">
 			<div class="grid-content">
 				<zf-accordion auto-open="false" collapsible="true">
-				<zf-accordion-item title="Give Feedback">
-					<section class="block-list">
-					<ul>
-					<li>
-					<input type="checkbox" id="flag1">
-					<label for="flag1">flag1</label>
-					</li>
-					<li>
-					<input type="checkbox" id="flag2">
-					<label for="flag2">flag2</label>
-					</li>
-					<li>
-					<input type="checkbox" id="flag3">
-					<label for="flag3">flag3</label>
-					</li>
-					</ul>
-					</section>
-				</zf-accordion-item>
+					<zf-accordion-item title="Give Feedback">
+						<section class="block-list">
+						<ul>
+							<li>
+								<input type="checkbox" id="flag1">
+								<label for="flag1">flag1</label>
+							</li>
+							<li>
+								<input type="checkbox" id="flag2">
+								<label for="flag2">flag2</label>
+							</li>
+							<li>
+								<input type="checkbox" id="flag3">
+								<label for="flag3">flag3</label>
+							</li>
+						</ul>
+						</section>
+					</zf-accordion-item>
 				</zf-accordion>
 			</div>
 		</div>
