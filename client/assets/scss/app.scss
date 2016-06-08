@@ -1,13 +1,86 @@
 @import "settings";
 @import "foundation";
 
+// Typography
+$sans: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+// Colors
+$hobsons: #1E787A;
+$hobsons150: #03474c;
+
+$fuschia: #D20061;
+
+$gray: #616365;
+$gray25: #d7d8d8;
+$offblack: #252628;
+
+$teal150: #37a2a2;
+
+$white: #ffffff;
+
+
+
+a {
+	color: $hobsons;
+}
+
+body, h1, h2, h3, h4, p {
+	color: $offblack;
+	font-family: $sans;
+}
+
+
+
 img {
 	border-radius: 50%;
+	width: 50px;
+	//display: none;
+}
+
+small {
+	color: $gray;
+}
+
+
+.button {
+	border-radius: 4.8rem;
+	width: 200px;
+	border: 1px solid $teal150;
+	background: $white;
+	color: $teal150;
+	text-transform: uppercase;
+}
+
+.button:hover, .button:focus, .button:active {
+	background: $teal150;
+	color: $white;
+}
+
+.button.absent, .button.excused, .button.tardy {
+	border: 1px solid $fuschia;
+	color: $white;
+	background: $fuschia;
+}
+
+.card {
+	color: $offblack;
 }
 
 .grid-container {
 	min-width: 100%;
 	max-width: 100%;
 	margin: 0;
-	margin-top: .5em;
+	// margin-top: .5em;
+}
+
+.logo {
+	width: 2rem;
+}
+
+.row {
+	padding-top: .5em;
+	border-bottom: 1px solid $gray25;
+}
+
+.title-bar.primary {
+	background: $hobsons150;
 }
