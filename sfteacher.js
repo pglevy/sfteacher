@@ -101,7 +101,6 @@ db.serialize(function() {
   db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_id) VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','philiplevy1234','Dramatic Change in Appearance','HIST-HIST301-600-201602')");
   db.run("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_id) VALUES ('Summer 2016','Yasmin Gold','2016-06-07 10:00:00','steveday1234','Dramatic Change in Appearance','SCI-BIOL202-600-201602')");
 
-
 	//select and loop results
 	db.each("SELECT * from " + TABLE_COURSES, function(err, row) {
 		console.log(row.id + ": " + row.course_name + " (" + row.date + ")");
@@ -138,10 +137,11 @@ app.get('/surveys', function (req, res) {
 });
 
 app.get('/updateAttendance', jsonParser, function (req, res){
-  console.log(req.query);
-//   if (!req.body) return res.sendStatus(400);
-
 	updateAttendance(req,res);
+});
+
+app.get('/updateFlag', jsonParser, function (req, res){
+	updateFlag(req,res);
 });
 //
 // app.post('/addUser', jsonParser, function (req, res){
@@ -254,7 +254,8 @@ function getStudentsInClass(req,res){
 function getSurveyInClass(req,res){
   var body = req.query;
 //   SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from tbl_flag f   INNER JOIN   tbl_students s   on s.student_id =  f.student_id WHERE f.course_id = 'SCI-BIOL202-600-201602'
-	databaseManager("SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from " + TABLE_FLAG + " f INNER JOIN " + TABLE_STUDENTS + " s ON s.student_id = f.student_id WHERE f.course_id ='" + body.courseId +"'",SELECT,null,res);
+// 	databaseManager("SELECT s.student_id, f.id, f.survey, s.student_name, s.image, f.course_id, s.student_id  from " + TABLE_FLAG + " f INNER JOIN " + TABLE_STUDENTS + " s ON s.student_id = f.student_id WHERE f.course_id ='" + body.courseId +"'",SELECT,null,res);
+databaseManager("SELECT * from " + TABLE_STUDENTS + " WHERE course_id ='" + body.courseId +"'",SELECT,null,res);
 }
 
 //POSTS
@@ -265,8 +266,9 @@ function updateAttendance(req,res){
 }
 
 function updateFlag(req,res){
-	var body = req.body;
-	databaseManager("UPDATE " + TABLE_FLAG + " SET attendance_status='" + body.status + "' WHERE student_id = '" + body.studentId + "'", MODIFY, body.studentName + " has been updated!",res);
+	var body = req.query;
+databaseManager("INSERT INTO " +  TABLE_FLAG + "('survey','instructor','survey_date','student_id','tracking_item_name',course_id) VALUES ('Spring 2016','Yasmin Gold','2016-06-07 10:00:00','"+body.studentId+"','"+ body.status+"','"+body.courseId+"')", MODIFY,JSON.stringify(body),res);
+
 }
 
 
