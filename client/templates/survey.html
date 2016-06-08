@@ -45,16 +45,16 @@ controller : SurveyController
 						<section class="block-list">
 						<ul>
 							<li>
-								<input type="checkbox" id="flag1{{student.student_id}}">
-								<label for="flag1{{student.student_id}}">Behavior Concern</label>
+								<input ng-model="flag1" type="checkbox" id="flag1_{{student.student_id}}" ng-change="change('Behavior Concern','{{student.student_id}}')">
+								<label for="flag1_{{student.student_id}}">Behavior Concern</label>
 							</li>
 							<li>
-								<input type="checkbox" id="flag2{{student.student_id}}">
-								<label for="flag2{{student.student_id}}">Attendance Concern</label>
+								<input  ng-model="flag2" type="checkbox" id="flag2_{{student.student_id}}" ng-change="change('Attendance Concern', '{{student.student_id}}')">
+								<label for="flag2_{{student.student_id}}">Attendance Concern</label>
 							</li>
 							<li>
-								<input type="checkbox" id="flag3{{student.student_id}}">
-								<label for="flag3{{student.student_id}}">Dramatic Change in Appearance</label>
+								<input ng-model="flag3"  type="checkbox" id="flag3_{{student.student_id}}" ng-change="change('Dramatic Change in Appearance', '{{student.student_id}}')">
+								<label for="flag3_{{student.student_id}}">Dramatic Change in Appearance</label>
 							</li>
 						</ul>
 						</section>

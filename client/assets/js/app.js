@@ -1,3 +1,5 @@
+
+
 (function() {
   'use strict';
 
@@ -10,6 +12,7 @@
     'foundation.dynamicRouting',
     'foundation.dynamicRouting.animations'
   ])
+
     .controller('CourseController',
     ["$scope", "$state", "$http",function($scope, $state, $http){
 
@@ -26,18 +29,40 @@
   .controller('SurveyController',
     ["$scope", "$state", "$http", "$location",function($scope, $state, $http, $location){
 
+    $scope.post = ($state.params.post || false);
+
     var params = {
       courseId : 'SCI-BIOL202-600-201602'
+    };
+
+    $scope.change = function(val,id) {
+
+    params = {
+      courseId : 'SCI-BIOL202-600-201602',
+      status  : val,
+      studentId : id
+    };
+
+        $http.get("http://localhost:8081/updateFlag", {params: params, cache:false})
+          .success(function(data){
+            console.log(data);
+          })
+          .error(function(data){
+            console.log(data);
+            $scope['students'] = 'Failed'
+          })
     }
+
     $http.get("http://localhost:8081/surveys", {params: params,cache:false})
-        .success(function(data){
-          console.log(data);
-          $scope['students'] = data;
-        })
-        .error(function(data){
-          console.log(data);
-          $scope['students'] = 'Failed'
-        })
+    .success(function(data){
+      console.log(data);
+      $scope['students'] = data;
+    })
+    .error(function(data){
+      console.log(data);
+      $scope['students'] = 'Failed'
+    })
+
   }])
 
     .controller('AttendanceController',
