@@ -45,17 +45,16 @@
   $scope.studentId = ($state.params.studentId || '');
   $scope.post = ($state.params.post || false);
 
-  console.log("is studentId? "+$scope.studentId);
   var params = {};
 
     if($scope.post){
 
     params = {
-    'status' : $scope.attendance,
-    'studentId' : $scope.studentId
+      status : $scope.attendance,
+      studentId : $scope.studentId
     };
 
-    $http.post("http://localhost:8081/updateAttendance", {withCredentials: true, params: params, cache:true})
+    $http.get("http://localhost:8081/updateAttendance", {params: params, cache:false})
         .success(function(data){
           console.log(data);
 
@@ -67,10 +66,10 @@
      }else{
 
     params = {
-     'courseId' : $scope.id
+      courseId : $scope.id
     };
 
-    $http.get("http://localhost:8081/student/course", {params: params, cache:true})
+    $http.get("http://localhost:8081/student/course", {params: params, cache:false})
         .success(function(data){
           console.log(data);
           $scope['students'] = data;
@@ -95,7 +94,7 @@
     // These three lines are all you need for CORS support
     $httpProvider.defaults.useXDomain = false;
     $httpProvider.defaults.withCredentials = false;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+//     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
     $locationProvider.html5Mode({

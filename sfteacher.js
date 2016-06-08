@@ -80,6 +80,7 @@ app.get('/students', function (req, res) {
 });
 
 app.get('/student/course', function (req, res) {
+  console.log(req.query);
 	getStudentsInClass(req, res);
 });
 
@@ -87,10 +88,9 @@ app.get('/surveys', function (req, res) {
 	getSurveyInClass(req, res);
 });
 
-app.post('/updateAttendance', jsonParser, function (req, res){
-
-  req.header("Access-Control-Allow-Origin", "*");
-  if (!req.body) return res.sendStatus(400);
+app.get('/updateAttendance', jsonParser, function (req, res){
+  console.log(req.query);
+//   if (!req.body) return res.sendStatus(400);
 
 	updateAttendance(req,res);
 });
@@ -203,6 +203,7 @@ function getStudentsInClass(req,res){
 }
 
 function getSurveyInClass(req,res){
+
   var body = req.query;
 //   SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from tbl_flag f   INNER JOIN   tbl_students s   on s.student_id =  f.student_id WHERE f.course_id = 'SCI-BIOL202-600-201602'
 	databaseManager("SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from " + TABLE_FLAG + " f INNER JOIN " + TABLE_STUDENTS + " s ON s.student_id = f.student_id WHERE f.course_id ='" + body.courseId +"'",SELECT,null,res);
@@ -210,7 +211,7 @@ function getSurveyInClass(req,res){
 
 //POSTS
 function updateAttendance(req,res){
-	var body = req.body;
+	var body = req.query;
 	databaseManager("UPDATE " + TABLE_STUDENTS + " SET attendance_status='" + body.status + "' WHERE student_id = '" + body.studentId + "'", MODIFY, body.studentName + " has been updated!",res);
 }
 
