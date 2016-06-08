@@ -1,6 +1,7 @@
 ---
 name: attendance
-url: /attendance
+url: /attendance/:id
+controller: AttendanceController
 ---
 
 <style>
@@ -14,13 +15,14 @@ url: /attendance
 </style>
 
 <div class="grid-container">
-	<div class="grid-block">
+	<div class="grid-block"  ng-repeat="student in students">
 		<div class="grid-block shrink">
 			<div class="grid-content">
 				<div class="align-bottom"></div>
 				<div class="align-center"></div>
 				<div class="align-top">
 					<img src="http://placehold.it/50x50">
+				<div class="align-center">
 				</div>
 			</div>
 		</div>
@@ -54,7 +56,7 @@ url: /attendance
 		</div>
 		<div class="grid-block">
 			<div class="grid-content">
-				<h2>Rachel Lands</h2>
+				<h2>{{student.student_name}}</h2>
 				<zf-action-sheet id="my-actionsheet">
 				<zf-as-button><a class="small button">Present</a></zf-as-button>
 				<zf-as-content position="bottom">
@@ -67,6 +69,7 @@ url: /attendance
 					</ul>
 				</zf-as-content>
 				</zf-action-sheet>
+
 			</div>
 		</div>
 	</div>

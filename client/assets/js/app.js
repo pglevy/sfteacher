@@ -26,9 +26,6 @@
   .controller('SurveyController',
     ["$scope", "$state", "$http",function($scope, $state, $http){
 
-var params = {
-    "courseId": "SCI-BIOL202-600-201602"
-}
     $http.get("http://localhost:8081/surveys", {params: params, cache:true})
         .success(function(data){
           console.log(data);
@@ -37,6 +34,24 @@ var params = {
         .error(function(data){
           console.log(data);
           $scope['surveys'] = 'Failed'
+        })
+  }])
+
+    .controller('AttendanceController',
+    ["$scope", "$state", "$http",function($scope, $state, $http){
+  $scope.id = ($state.params.id || '');
+
+  var params = {
+    'courseId' : $scope.id
+  }
+    $http.get("http://localhost:8081/student/course", {params: params, cache:true})
+        .success(function(data){
+          console.log(data);
+          $scope['students'] = data;
+        })
+        .error(function(data){
+          console.log(data);
+          $scope['students'] = 'Failed'
         })
   }])
     .config(config)
