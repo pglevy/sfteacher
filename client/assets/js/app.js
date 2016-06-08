@@ -27,7 +27,7 @@
     ["$scope", "$state", "$http", "$location",function($scope, $state, $http, $location){
 
     var params = {
-      courseId : 'SCI-BIOL202-600-201602'
+      courseId : ($state.params.id || 'SCI-BIOL202-600-201602')
     }
     $http.get("http://localhost:8081/surveys", {params: params,cache:false})
         .success(function(data){
@@ -55,7 +55,7 @@
     params = {
       status : $scope.attendance,
       studentId : $scope.studentId,
-      courseId : $scope.courseId
+      courseId :$scope.courseId
     };
 
     $http.get("http://localhost:8081/updateAttendance", {params: params, cache:false})
@@ -70,7 +70,7 @@
      }else{
 
     params = {
-      courseId : $scope.id
+      courseId : ($scope.id || 'SCI-BIOL202-600-201602')
     };
 
     $http.get("http://localhost:8081/student/course", {params: params, cache:false})
