@@ -24,16 +24,19 @@
         })
   }])
   .controller('SurveyController',
-    ["$scope", "$state", "$http",function($scope, $state, $http){
+    ["$scope", "$state", "$http", "$location",function($scope, $state, $http, $location){
 
-    $http.get("http://localhost:8081/surveys", {cache:false})
+    var params = {
+      courseId : 'SCI-BIOL202-600-201602'
+    }
+    $http.get("http://localhost:8081/surveys", {params: params,cache:false})
         .success(function(data){
           console.log(data);
-          $scope['surveys'] = data;
+          $scope['students'] = data;
         })
         .error(function(data){
           console.log(data);
-          $scope['surveys'] = 'Failed'
+          $scope['students'] = 'Failed'
         })
   }])
 

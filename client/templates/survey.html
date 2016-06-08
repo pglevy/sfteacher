@@ -1,6 +1,7 @@
 ---
 name: survey
-url: /survey
+url: /survey?id=
+controller : SurveyController
 ---
 
 <style>
@@ -15,19 +16,21 @@ url: /survey
 
 
 <div class="grid-container">
+<div  ng-repeat="student in students">
 	<div class="grid-block row-top-half">
+
 		<div class="grid-block small-3">
 			<div class="grid-content">
 					<div class="align-bottom"></div>
 					<div class="align-center"></div>
 					<div class="align-top">
-						<img src="http://placehold.it/50x50">
+						<img src="{{student.image}}">
 					</div>
 			</div>
 		</div>
 		<div class="grid-block small-9">
 			<div class="grid-content">
-				<h2>Rachel Lands</h2>
+				<h2>{{student.student_name}}</h2>
 			</div>
 		</div>
 	</div>
@@ -42,16 +45,16 @@ url: /survey
 						<section class="block-list">
 						<ul>
 							<li>
-								<input type="checkbox" id="flag1">
-								<label for="flag1">Behavior Concern</label>
+								<input type="checkbox" id="flag1{{student.student_id}}">
+								<label for="flag1{{student.student_id}}">Behavior Concern</label>
 							</li>
 							<li>
-								<input type="checkbox" id="flag2">
-								<label for="flag2">Attendance Concern</label>
+								<input type="checkbox" id="flag2{{student.student_id}}">
+								<label for="flag2{{student.student_id}}">Attendance Concern</label>
 							</li>
 							<li>
-								<input type="checkbox" id="flag3">
-								<label for="flag3">Dramatic Change in Appearance</label>
+								<input type="checkbox" id="flag3{{student.student_id}}">
+								<label for="flag3{{student.student_id}}">Dramatic Change in Appearance</label>
 							</li>
 						</ul>
 						</section>
@@ -60,9 +63,8 @@ url: /survey
 			</div>
 		</div>
 	</div>
+		</div>
 </div>
-
-
 
 
 

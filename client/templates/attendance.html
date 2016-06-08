@@ -1,6 +1,6 @@
 ---
 name: attendance
-url: /attendance/:id?attendance=studentId=post=
+url: /attendance/?id=attendance=studentId=post=
 controller: AttendanceController
 ---
 
@@ -14,7 +14,6 @@ controller: AttendanceController
 }
 
 </style>
-
 
 <div class="grid-container">
 	<div class="grid-block row" ng-repeat="student in students">
@@ -33,7 +32,7 @@ controller: AttendanceController
 				<zf-action-sheet id="my-actionsheet">
 				<zf-as-button><a class="small button {{student.attendance_status | lowercase}} ">{{student.attendance_status}}</a></zf-as-button>
 				<zf-as-content position="bottom">
-					<p>Tap to mark attendance</p>
+					<p>Tap to mark attendance </p>
 					<ul>
 						<li><a ui-sref="attendance({ id: student.course_id, attendance : 'PRESENT', studentId: student.student_id, post : true})">Present</a></li>
 						<li><a ui-sref="attendance({ id: student.course_id, attendance : 'ABSENT', studentId: student.student_id, post : true})">Absent</a></li>
@@ -46,5 +45,8 @@ controller: AttendanceController
 		</div>
 	</div>
 </div>
+
+
+
 
 
