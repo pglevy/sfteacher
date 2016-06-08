@@ -1,6 +1,6 @@
 ---
 name: attendance
-url: /attendance/:id?status=studentId=post=
+url: /attendance/:id?attendance=studentId=post=
 controller: AttendanceController
 ---
 
@@ -35,10 +35,10 @@ controller: AttendanceController
 				<zf-as-content position="bottom">
 					<p>Tap to mark attendance</p>
 					<ul>
-						<li><a ui-sref="attendance({ id: student.id, status : 'Present', studentId: student.student_id, post : true})">Present</a></li>
-						<li><a ui-sref="attendance({  id: student.id,  status : 'Absent', studentId: student.student_id, post : true})">Absent</a></li>
-						<li><a ui-sref="attendance({  id: student.id,  status : 'Excused', studentId: student.student_id, post : true})">Excused</a></li>
-						<li><a ui-sref="attendance({  id: student.id,  status : 'Tardy', studentId: student.student_id, post : true})">Tardy</a></li>
+						<li><a ui-sref="attendance({ id: student.id, attendance : 'Present', studentId: student.student_id, post : true})">Present</a></li>
+						<li><a ui-sref="attendance({  id: student.id,  attendance : 'Absent', studentId: student.student_id, post : true})">Absent</a></li>
+						<li><a ui-sref="attendance({  id: student.id,  attendance : 'Excused', studentId: student.student_id, post : true})">Excused</a></li>
+						<li><a ui-sref="attendance({  id: student.id,  attendance : 'Tardy', studentId: student.student_id, post : true})">Tardy</a></li>
 					</ul>
 				</zf-as-content>
 				</zf-action-sheet>
