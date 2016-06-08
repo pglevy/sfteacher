@@ -50,10 +50,6 @@
 
     if($scope.post){
 
-    $http.defaults.headers['Access-Control-Allow-Origin'] = '*';
-    $http.defaults.headers["Access-Control-Allow-Headers"] = "X-Requested-With";
-    $http.defaults.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT';
-
     params = {
     'status' : $scope.attendance,
     'studentId' : $scope.studentId
@@ -90,10 +86,17 @@
   ;
 
 
-  config.$inject = ['$urlRouterProvider', '$locationProvider'];
+  config.$inject = ['$urlRouterProvider', '$locationProvider','$httpProvider'];
 
-  function config($urlProvider, $locationProvider) {
+  function config($urlProvider, $locationProvider, $httpProvider) {
     $urlProvider.otherwise('/');
+
+    // We need to setup some parameters for http requests
+    // These three lines are all you need for CORS support
+    $httpProvider.defaults.useXDomain = false;
+    $httpProvider.defaults.withCredentials = false;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
     $locationProvider.html5Mode({
       enabled:false,
