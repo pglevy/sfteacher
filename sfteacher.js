@@ -14,6 +14,7 @@ var TABLE_FLAG = "tbl_flag";//Survey
 
 var SELECT = 0;
 var MODIFY = 1;
+var CHAIN = 2;
 
 ///////////////////// on start up create new DB /////////////////////
 var sqlite3 = require('sqlite3').verbose();
@@ -203,7 +204,6 @@ function getStudentsInClass(req,res){
 }
 
 function getSurveyInClass(req,res){
-
   var body = req.query;
 //   SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from tbl_flag f   INNER JOIN   tbl_students s   on s.student_id =  f.student_id WHERE f.course_id = 'SCI-BIOL202-600-201602'
 	databaseManager("SELECT f.id, f.survey, s.student_name, s.image,s.student_id, f.course_id, s.student_id  from " + TABLE_FLAG + " f INNER JOIN " + TABLE_STUDENTS + " s ON s.student_id = f.student_id WHERE f.course_id ='" + body.courseId +"'",SELECT,null,res);
@@ -212,7 +212,8 @@ function getSurveyInClass(req,res){
 //POSTS
 function updateAttendance(req,res){
 	var body = req.query;
-	databaseManager("UPDATE " + TABLE_STUDENTS + " SET attendance_status='" + body.status + "' WHERE student_id = '" + body.studentId + "'", MODIFY, body.studentName + " has been updated!",res);
+	databaseManager("UPDATE " + TABLE_STUDENTS + " SET attendance_status='" + body.status + "' WHERE student_id = '" + body.studentId + "'", CHAIN, null,res, getStudentsInClass,req);
+
 }
 
 function updateFlag(req,res){
@@ -226,7 +227,7 @@ function updateFlag(req,res){
 // 	databaseManager("SELECT * from " + TABLE_GROUP,SELECT,null,res);
 // }
 
-function databaseManager(sql,type,response,res){
+function databaseManager(sql,type,response,res,callback,req){
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -246,6 +247,11 @@ function databaseManager(sql,type,response,res){
 			case MODIFY :
 				db.run(sql);
 				res.send(response);
+				break;
+			case CHAIN :
+				db.all(sql,function(err, rows){
+				  callback(req,res)
+				});
 				break;
 		}
 

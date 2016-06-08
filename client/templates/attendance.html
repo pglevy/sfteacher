@@ -31,14 +31,14 @@ controller: AttendanceController
 			<div class="grid-content">
 				<h2>{{student.student_name}}</h2>
 				<zf-action-sheet id="my-actionsheet">
-				<zf-as-button><a class="small button">Present</a></zf-as-button>
+				<zf-as-button><a class="small button {{student.attendance_status | lowercase}} ">{{student.attendance_status}}</a></zf-as-button>
 				<zf-as-content position="bottom">
 					<p>Tap to mark attendance</p>
 					<ul>
-						<li><a ui-sref="attendance({ id: student.id, attendance : 'Present', studentId: student.student_id, post : true})">Present</a></li>
-						<li><a ui-sref="attendance({  id: student.id,  attendance : 'Absent', studentId: student.student_id, post : true})">Absent</a></li>
-						<li><a ui-sref="attendance({  id: student.id,  attendance : 'Excused', studentId: student.student_id, post : true})">Excused</a></li>
-						<li><a ui-sref="attendance({  id: student.id,  attendance : 'Tardy', studentId: student.student_id, post : true})">Tardy</a></li>
+						<li><a ui-sref="attendance({ id: student.course_id, attendance : 'PRESENT', studentId: student.student_id, post : true})">Present</a></li>
+						<li><a ui-sref="attendance({ id: student.course_id, attendance : 'ABSENT', studentId: student.student_id, post : true})">Absent</a></li>
+						<li><a ui-sref="attendance({ id: student.course_id, attendance : 'EXCUSED', studentId: student.student_id, post : true})">Excused</a></li>
+						<li><a ui-sref="attendance({ id: student.course_id, attendance : 'TARDY', studentId: student.student_id, post : true})">Tardy</a></li>
 					</ul>
 				</zf-as-content>
 				</zf-action-sheet>

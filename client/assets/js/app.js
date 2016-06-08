@@ -13,7 +13,7 @@
     .controller('CourseController',
     ["$scope", "$state", "$http",function($scope, $state, $http){
 
-    $http.get("http://localhost:8081/courses", {cache:true})
+    $http.get("http://localhost:8081/courses", {cache:false})
         .success(function(data){
           console.log(data);
           $scope['courses'] = data;
@@ -26,7 +26,7 @@
   .controller('SurveyController',
     ["$scope", "$state", "$http",function($scope, $state, $http){
 
-    $http.get("http://localhost:8081/surveys", {cache:true})
+    $http.get("http://localhost:8081/surveys", {cache:false})
         .success(function(data){
           console.log(data);
           $scope['surveys'] = data;
@@ -40,6 +40,7 @@
     .controller('AttendanceController',
     ["$scope", "$state", "$http",function($scope, $state, $http){
 
+  $scope.courseId = ($state.params.id || '');
   $scope.id = ($state.params.id || '');
   $scope.attendance = ($state.params.attendance || '');
   $scope.studentId = ($state.params.studentId || '');
@@ -47,21 +48,21 @@
 
   var params = {};
 
-    if($scope.post){
-
+    if($scope.post == "true"){
     params = {
       status : $scope.attendance,
-      studentId : $scope.studentId
+      studentId : $scope.studentId,
+      courseId : $scope.courseId
     };
 
     $http.get("http://localhost:8081/updateAttendance", {params: params, cache:false})
         .success(function(data){
           console.log(data);
-
+          $scope['students'] = data;
         })
         .error(function(data){
           console.log(data);
-
+          $scope['students'] = 'Failed'
         })
      }else{
 
