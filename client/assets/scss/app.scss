@@ -22,7 +22,6 @@ $teal25: #ddf2f2;
 $white: #ffffff;
 
 
-
 a {
 	color: $hobsons;
 }
@@ -69,6 +68,14 @@ small {
 .accordion-content li, .accordion-content ul {
 	text-align: left;
 	border: 0px;
+}
+
+.action-sheet {
+	box-shadow: none;
+}
+
+.action-sheet.is-active {
+	box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .block-list li > a:hover, .block-list li > label:hover, .block-list li select:hover {
@@ -122,10 +129,6 @@ small {
     box-shadow: inset 0px -6px 0px 0px $teal;
 }
 
-.menu-bar .iconic * {
-	stroke: $hobsons;
-}
-
 .footer {
 	border-top: 1px solid $teal25;
 	padding: 0;
@@ -164,6 +167,10 @@ small {
 .menu-bar.calendar > li > a {
 	padding-top: .5rem;
 	padding-bottom: 0;
+}
+
+.menu-bar .iconic * {
+	stroke: $hobsons;
 }
 
 .row {
